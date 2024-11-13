@@ -45,7 +45,7 @@ This project automates Lighthouse audits on specified URLs and stores the result
 
 Run the script by executing:
 ```bash
-node --env.file.env <script-name>.js
+node --env.file.env <script-name>.mjs
 ```
 
 This will:
@@ -56,7 +56,7 @@ This will:
 
 ## Project Structure
 
-* app.js: Main entry file that initiates the Lighthouse audit and handles data storage and visualization.
+* app.mjs: Main entry file that initiates the Lighthouse audit and handles data storage and visualization.
 
 * ### Fuctions:
     * setupBrowser(url): Sets up Puppeteer with a new browser and page.
