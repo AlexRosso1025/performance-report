@@ -1,4 +1,4 @@
-# Lighthouse Performance Report with Puppeteer and ExcelJS
+# Lighthouse Performance Report with Puppeteer and ExcelJS for VTEX Store
 
 This project automates Lighthouse audits on specified URLs and stores the resulting performance data in an Excel file. Additionally, it generates visual charts to track metrics over time.
 
