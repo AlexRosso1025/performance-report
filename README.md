@@ -44,10 +44,9 @@ This project automates Lighthouse audits on specified URLs and stores the result
 ## Usage
 
 Run the script by executing:
-
-    ```bash
-    node --env.file.env <script-name>.js
-    ```
+```bash
+node --env.file.env <script-name>.js
+```
 
 This will:
 
@@ -76,11 +75,11 @@ This will:
 
 The following example assumes the following .env file:
 
-    ```bash
-    URL=https://www.example.myvex.com
-    COMPONENT=example
-    VTEX_ID_CLIENT_AUT_COOKIE=your-auth-cookie
-    ```
+```bash
+URL=https://www.example.myvex.com
+COMPONENT=example
+VTEX_ID_CLIENT_AUT_COOKIE=your-auth-cookie
+```
 
 Running the script will create:
 * An Excel file named lighthouse-report-example.xlsx with audit results.
