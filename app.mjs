@@ -95,12 +95,19 @@ async function readDataFromExcel(component) {
 
 // Función para generar el gráfico en base a los datos
 async function generateChartImage(data, component) {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   await page.goto("about:blank", { waitUntil: "networkidle0" });
   await page.addScriptTag({ url: "https://cdn.jsdelivr.net/npm/chart.js" });
   await page.waitForFunction(() => typeof Chart !== "undefined");
+
+  const averages = {
+    performance: (data.reduce((sum, item)=> sum + item.performance, 0) / data.length).toFixed(2),
+    accessibility: (data.reduce((sum, item)=> sum + item.accessibility, 0) / data.length).toFixed(2),
+    bestPractices: (data.reduce((sum, item)=> sum + item.bestPractices, 0) / data.length).toFixed(2),
+    seo: (data.reduce((sum, item)=> sum + item.seo, 0) / data.length).toFixed(2),
+  }
 
   const chartConfig = {
     type: "line",
@@ -113,11 +120,24 @@ async function generateChartImage(data, component) {
         { label: "SEO", data: data.map((item) => item.seo), borderColor: "rgb(51, 0, 0)", fill: false },
       ],
     },
+    options: {
+
+      plugins: {
+        subtitle:{
+          display: true,
+          text: `Avg Perfomance: ${averages.performance} | Avg Accessibility: ${averages.accessibility} | Avg Best Practices: ${averages.bestPractices} | Avg Seo: ${averages.seo}`
+        },
+        legend: {
+          display: true,
+          position: 'right',
+        }
+      }
+    }
   };
 
   await page.evaluate((chartConfig) => {
     const canvas = document.createElement("canvas");
-    canvas.width = 800;
+    canvas.width = 1000;
     canvas.height = 600;
     document.body.appendChild(canvas);
     new Chart(canvas.getContext("2d"), chartConfig);
