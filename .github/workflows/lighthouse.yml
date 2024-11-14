@@ -38,3 +38,4 @@ jobs:
           path: |
             lighthouse-report-${{ secrets.COMPONENT }}.xlsx
             lighthouse-report-${{ secrets.COMPONENT }}.png
+            
