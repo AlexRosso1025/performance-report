@@ -1,0 +1,40 @@
+name: Lighthouse Report Workflow
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  lighthouse-report:
+    runs-on: ubuntu-latest
+
+    env:
+      URL: ${{ secrets.URL }}
+      COMPONENT: ${{ secrets.COMPONENT }}
+      VTEX_ID_CLIENT_AUT_COOKIE: ${{ secrets.VTEX_ID_CLIENT_AUT_COOKIE }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Lighthouse script
+        run: |
+          node app.mjs
+          
+      - name: Upload report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Lighthouse Report
+          path: |
+            lighthouse-report-${{ secrets.COMPONENT }}.xlsx
+            lighthouse-report-${{ secrets.COMPONENT }}.png

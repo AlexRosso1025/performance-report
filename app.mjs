@@ -121,7 +121,6 @@ async function generateChartImage(data, component) {
       ],
     },
     options: {
-
       plugins: {
         subtitle:{
           display: true,
