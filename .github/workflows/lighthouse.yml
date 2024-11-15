@@ -30,11 +30,14 @@ jobs:
       - name: Run Lighthouse script
         run: |
           node app.mjs
+
+      - name: Set Date Variable
+        run: echo "REPORT_DATE=$(date +'%d-%m-%Y')" >> $GITHUB_ENV
           
       - name: Upload report as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Lighthouse Report
+          name: Lighthouse Report ${{ env.REPORT_DATE }}
           path: |
             lighthouse-report-${{ secrets.COMPONENT }}.xlsx
             lighthouse-report-${{ secrets.COMPONENT }}-general.png
